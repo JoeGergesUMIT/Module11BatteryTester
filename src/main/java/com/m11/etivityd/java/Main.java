@@ -243,7 +243,24 @@ class BatteryTestConsoleApp {
                 contentStream.newLineAtOffset(50, 100);
                 contentStream.setFont(PDType1Font.HELVETICA, 12);
                 contentStream.showText("Unterschrift: _______________________");
-                contentStream.newLineAtOffset(0, -15);
+                contentStream.endText();
+
+                contentStream.beginText();
+                contentStream.newLineAtOffset(350, 100);
+                contentStream.setFont(PDType1Font.HELVETICA, 12);
+                contentStream.showText("Zweite Unterschrift: _______________________");
+                contentStream.endText();
+
+                // Dates for signatures
+                contentStream.beginText();
+                contentStream.newLineAtOffset(50, 85);
+                contentStream.setFont(PDType1Font.HELVETICA, 12);
+                contentStream.showText("Datum: " + timestamp.split(" ")[0]);
+                contentStream.endText();
+
+                contentStream.beginText();
+                contentStream.newLineAtOffset(350, 85);
+                contentStream.setFont(PDType1Font.HELVETICA, 12);
                 contentStream.showText("Datum: " + timestamp.split(" ")[0]);
                 contentStream.endText();
             }
@@ -290,3 +307,4 @@ class BatteryTestConsoleApp {
         return true;
     }
 }
+
