@@ -171,6 +171,17 @@ class BatteryTestConsoleApp {
             document.addPage(page);
 
             try (PDPageContentStream contentStream = new PDPageContentStream(document, page)) {
+                // Software version
+                String softwareVersion = "BatteryCheck Pro Version 1.2";
+                contentStream.setFont(PDType1Font.HELVETICA, 10);
+                contentStream.setNonStrokingColor(Color.GRAY);
+                contentStream.beginText();
+                float titleWidth = PDType1Font.HELVETICA.getStringWidth(softwareVersion) / 1000 * 10;
+                float startX = (page.getMediaBox().getWidth() - titleWidth) / 2;
+                contentStream.newLineAtOffset(startX, 800);
+                contentStream.showText(softwareVersion);
+                contentStream.endText();
+
                 // Titel
                 contentStream.setFont(PDType1Font.HELVETICA_BOLD, 18);
                 contentStream.setNonStrokingColor(testPassed ? Color.GREEN : Color.RED);
@@ -242,25 +253,16 @@ class BatteryTestConsoleApp {
                 contentStream.beginText();
                 contentStream.newLineAtOffset(50, 100);
                 contentStream.setFont(PDType1Font.HELVETICA, 12);
-                contentStream.showText("Unterschrift: _______________________");
-                contentStream.endText();
-
-                contentStream.beginText();
-                contentStream.newLineAtOffset(350, 100);
-                contentStream.setFont(PDType1Font.HELVETICA, 12);
-                contentStream.showText("Zweite Unterschrift: _______________________");
-                contentStream.endText();
-
-                // Dates for signatures
-                contentStream.beginText();
-                contentStream.newLineAtOffset(50, 85);
-                contentStream.setFont(PDType1Font.HELVETICA, 12);
+                contentStream.showText("Unterschrift (Erstprüfer): _______________________");
+                contentStream.newLineAtOffset(0, -15);
                 contentStream.showText("Datum: " + timestamp.split(" ")[0]);
                 contentStream.endText();
 
                 contentStream.beginText();
-                contentStream.newLineAtOffset(350, 85);
+                contentStream.newLineAtOffset(50, 50);
                 contentStream.setFont(PDType1Font.HELVETICA, 12);
+                contentStream.showText("Unterschrift (Zweitprüfer): _______________________");
+                contentStream.newLineAtOffset(0, -15);
                 contentStream.showText("Datum: " + timestamp.split(" ")[0]);
                 contentStream.endText();
             }
